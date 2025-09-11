@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr.Yomna</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f0f4f8;
+            color: #2d3748;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f472b6;
+            animation: confetti-fall 5s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+    <div id="greeting-card" class="bg-white rounded-3xl shadow-2xl p-6 md:p-10 text-center max-w-lg w-full transform transition-transform duration-500 ease-in-out scale-95 opacity-0">
+        <div class="relative mb-6">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-[#7c3aed] mt-4 mb-2"> Happy Birthday </h1>
+        </div>
+        <h2 class="text-xl md:text-3xl font-bold text-purple-700 mb-2">Dr.Yomna Osama</h2>
+        <p class="text-lg text-gray-500 mb-4">September 15th</p>
+        
+        <p id="message-content" class="text-md md:text-lg text-gray-700 leading-relaxed mb-6 hidden">
+            كل عام وانت اقرب الي قلوبنا، أدام الله عليك السعادة و الخير. أدامك الله في قلوبنا و حياتنا. وبقلبك الطيب الذي يملأ حياتنا دفئاً، أتمنى لكِ عيد ميلاد يليه ألف عيد. وعام جديد سعيد مملوء بالستر و الصحة و راحة البال.
+        </p>
+
+        <div class="flex flex-col items-center justify-center space-y-4 mt-6">
+            <span class="text-6xl md:text-8xl animate-bounce-in-out" style="color: #f472b6;">🎂</span>
+            <button id="show-message-btn" class="bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#7c3aed] focus:ring-opacity-50">
+                Show Message
+            </button>
+        </div>
+    </div>
+
+    <div id="confetti-container" class="absolute inset-0 z-0 pointer-events-none"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const card = document.getElementById('greeting-card');
+            const showMessageBtn = document.getElementById('show-message-btn');
+            const messageContent = document.getElementById('message-content');
+
+            // Initial animation for the card
+            setTimeout(() => {
+                card.classList.remove('scale-95', 'opacity-0');
+                card.classList.add('scale-100', 'opacity-100');
+            }, 100);
+
+            showMessageBtn.addEventListener('click', () => {
+                // Show message with a simple fade-in
+                messageContent.classList.remove('hidden');
+                messageContent.style.animation = 'fadeIn 1s forwards';
+                
+                // Hide the button and cake icon
+                showMessageBtn.classList.add('hidden');
+                
+                // Trigger confetti effect
+                startConfetti();
+            });
+
+            function startConfetti() {
+                const confettiContainer = document.getElementById('confetti-container');
+                for (let i = 0; i < 50; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    confetti.style.left = `${Math.random() * 100}vw`;
+                    confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    confetti.style.animationDelay = `${Math.random() * 2}s`;
+                    confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                    confettiContainer.appendChild(confetti);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

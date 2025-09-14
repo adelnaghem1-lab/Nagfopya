@@ -20,6 +20,25 @@
             position: relative;
         }
 
+        .page {
+            transition: opacity 1s ease-in-out;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            visibility: hidden;
+            width: 100%;
+            max-width: 700px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .page.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .confetti {
             position: absolute;
             width: 10px;
@@ -40,48 +59,71 @@
     </style>
 </head>
 <body class="p-4 sm:p-8">
-    <div id="greeting-card" class="bg-white rounded-3xl shadow-2xl p-6 md:p-10 text-center max-w-lg w-full transform transition-transform duration-500 ease-in-out scale-95 opacity-0">
-        <div class="relative mb-6">
-            <h1 class="text-3xl md:text-5xl font-extrabold text-[#7c3aed] mt-4 mb-2"> Happy Birthday </h1>
-        </div>
-        <h2 class="text-xl md:text-3xl font-bold text-purple-700 mb-2">Dr.Yomna Osama</h2>
-        <p class="text-lg text-gray-500 mb-4">September 15th</p>
-        
-        <p id="message-content" class="text-md md:text-lg text-gray-700 leading-relaxed mb-6 hidden">
-            كل عام وانت اقرب الي قلوبنا، أدام الله عليك السعادة و الخير. أدامك الله في قلوبنا و حياتنا. وبقلبك الطيب الذي يملأ حياتنا دفئاً، أتمنى لكِ عيد ميلاد يليه ألف عيد. وعام جديد سعيد مملوء بالستر و الصحة و راحة البال.
-        </p>
 
-        <div class="flex flex-col items-center justify-center space-y-4 mt-6">
-            <span class="text-6xl md:text-8xl animate-bounce-in-out" style="color: #f472b6;">🎂</span>
-            <button id="show-message-btn" class="bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#7c3aed] focus:ring-opacity-50">
-                Show Message
+    <div id="first-page" class="page active">
+        <div class="bg-white rounded-3xl shadow-2xl p-6 md:p-10 transform transition-transform duration-500 ease-in-out scale-100">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-[#7c3aed] mb-4">مصدر السعادة و النشاط </h1>
+            <p class="text-lg md:text-2xl text-gray-700 leading-relaxed mb-8">طالما كان القلب الحنون محور اهتمام من حوله، فهو رمز للحياة، ومصدر للطاقة الإيجابية. العناية به لا تقتصر على العلاج فقط، بل تبدأ من خلال نمط حياة مليء بالحب والعطاء، وهو ما نلمسه في شخصيتكِ دائمًا.
+
+تشير الأبحاث إلى أن الأشخاص ذوي القلوب الحنونة يساهمون في نشر الأمل والبهجة، وهو ما يعود بالنفع على صحة المجتمع ككل.
+
+وجودكِ في حياتنا هو مصدر إلهام لنا جميعاً، ووقاية من كل ما هو سلبي. لذا، ننصح دائمًا بالتعلم من حنيتكِ لضمان أفضل حماية ممكنة لأرواحنا.
+
+            </p>
+            <button id="next-page-btn" class="bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#7c3aed] focus:ring-opacity-50">
+                Next
             </button>
         </div>
     </div>
 
+    <div id="second-page" class="page">
+        <div id="greeting-card" class="bg-white rounded-3xl shadow-2xl p-6 md:p-10 text-center max-w-lg w-full transform transition-transform duration-500 ease-in-out scale-95 opacity-0">
+            <div class="relative mb-6">
+                <h1 class="text-3xl md:text-5xl font-extrabold text-[#7c3aed] mt-4 mb-2"> Happy Birthday </h1>
+            </div>
+            <h2 class="text-xl md:text-3xl font-bold text-purple-700 mb-2">Dr.Yomna Osama</h2>
+            <p class="text-lg text-gray-500 mb-4">September 15th</p>
+            
+            <p id="message-content" class="text-md md:text-lg text-gray-700 leading-relaxed mb-6 hidden">
+                كل عام وانت اقرب الي قلوبنا، أدام الله عليك السعادة و الخير. أدامك الله في قلوبنا و حياتنا. وبقلبك الطيب الذي يملأ حياتنا دفئاً، أتمنى لكِ عيد ميلاد يليه ألف عيد. وعام جديد سعيد مملوء بالستر و الصحة و راحة البال.
+            </p>
+    
+            <div class="flex flex-col items-center justify-center space-y-4 mt-6">
+                <span class="text-6xl md:text-8xl animate-bounce-in-out" style="color: #f472b6;">🎂</span>
+                <button id="show-message-btn" class="bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#7c3aed] focus:ring-opacity-50">
+                    Show Message
+                </button>
+            </div>
+        </div>
+    </div>
+    
     <div id="confetti-container" class="absolute inset-0 z-0 pointer-events-none"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const firstPage = document.getElementById('first-page');
+            const secondPage = document.getElementById('second-page');
+            const nextPageBtn = document.getElementById('next-page-btn');
             const card = document.getElementById('greeting-card');
             const showMessageBtn = document.getElementById('show-message-btn');
             const messageContent = document.getElementById('message-content');
 
-            // Initial animation for the card
-            setTimeout(() => {
-                card.classList.remove('scale-95', 'opacity-0');
-                card.classList.add('scale-100', 'opacity-100');
-            }, 100);
+            nextPageBtn.addEventListener('click', () => {
+                firstPage.classList.remove('active');
+                secondPage.classList.add('active');
+                
+                setTimeout(() => {
+                    card.classList.remove('scale-95', 'opacity-0');
+                    card.classList.add('scale-100', 'opacity-100');
+                }, 100);
+            });
 
             showMessageBtn.addEventListener('click', () => {
-                // Show message with a simple fade-in
                 messageContent.classList.remove('hidden');
                 messageContent.style.animation = 'fadeIn 1s forwards';
                 
-                // Hide the button and cake icon
                 showMessageBtn.classList.add('hidden');
                 
-                // Trigger confetti effect
                 startConfetti();
             });
 
